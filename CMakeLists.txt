@@ -6,7 +6,7 @@ endif()
 
 set(CMAKE_INSTALL_PREFIX "install" CACHE STRING "Description")
 
-project(particlesim VERSION 1.0 DESCRIPTION "Simulates particles" LANGUAGES CXX)
+project(particlesim VERSION 1.0 DESCRIPTION "Simulates particles" LANGUAGES C CXX)
 
 add_executable(particlesim src/main.cpp)
 
@@ -30,7 +30,12 @@ find_package(OpenGL REQUIRED)
 message(opengl library location : "${OPENGL_gl_LIBRARY}")
 message(found glx : "${OpenGL_GLX_FOUND}")
 
+# ----------- GLAD ------------
+
+add_library(glad STATIC external/glad/glad.c)
+target_include_directories(glad PUBLIC external/glad/include)
+
 # -------- Linking Libraries ----------------
-target_link_libraries(particlesim PUBLIC glfw imgui GL)
+target_link_libraries(particlesim PUBLIC glfw imgui GL glad)
 target_include_directories(particlesim PUBLIC external/imgui/backends external/glfw/include)
 

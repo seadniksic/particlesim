@@ -1,2 +1,7 @@
 build/
 external/
+.cache/
+
+
+# editor
+*.swp
